@@ -1,0 +1,8 @@
+lib/Config/Checker.pm
+lib/YAML/ConfigFile.pm
+lib/YAML/ConfigFile/YAML.pm
+Makefile.PL
+MANIFEST			This list of files
+t/checker.t
+t/config.t
+META.yml                                 Module meta-data (added by MakeMaker)
