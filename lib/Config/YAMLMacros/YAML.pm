@@ -1,5 +1,5 @@
 
-package YAML::ConfigFile::YAML;
+package Config::YAMLMacros::YAML;
 
 use strict;
 use warnings;
@@ -74,11 +74,11 @@ __END__
 
 =head1 NAME
 
-YAML::ConfigFile::YAML - small wrapper for YAML::Syck to improve error reporting
+Config::YAMLMacros::YAML - small wrapper for YAML::Syck to improve error reporting
 
 =head1 SYNOPSIS
 
- use YAML::ConfigFile::YAML;
+ use Config::YAMLMacros::YAML;
 
  $obj = LoadFile("file");
  @objs = LoadFile("file");

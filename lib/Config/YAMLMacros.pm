@@ -1,9 +1,9 @@
 
-package YAML::ConfigFile;
+package Config::YAMLMacros;
 
 use strict;
 use warnings;
-use YAML::ConfigFile::YAML qw(Load);
+use Config::YAMLMacros::YAML qw(Load);
 use File::Slurp qw(read_file);
 use Carp qw(confess);
 use File::Basename qw(basename dirname);
@@ -135,7 +135,7 @@ __END__
 
 =head1 SYNOPSIS
 
-use YAML::ConfigFile;
+use Config::YAMLMacros;
 
 my $config = get_config('/some/file');
 

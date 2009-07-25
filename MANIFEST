@@ -1,6 +1,7 @@
+CHANGELOG
 lib/Config/Checker.pm
-lib/YAML/ConfigFile.pm
-lib/YAML/ConfigFile/YAML.pm
+lib/Config/YAMLMacros.pm
+lib/Config/YAMLMacros/YAML.pm
 Makefile.PL
 MANIFEST			This list of files
 t/checker.t

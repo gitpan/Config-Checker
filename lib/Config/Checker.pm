@@ -5,16 +5,16 @@ use strict;
 use warnings;
 use Eval::LineNumbers qw(eval_line_numbers);
 require Exporter;
-require YAML::ConfigFile::YAML;
+require Config::YAMLMacros::YAML;
 require Module::Load;
 require Time::ParseDate;
 require Carp;
-use YAML::ConfigFile::YAML;
+use Config::YAMLMacros::YAML;
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw(config_checker_source);
 our @EXPORT_OK = (@EXPORT, qw(unique split_listify));
-our $VERSION = 0.3;
+our $VERSION = 0.4;
 
 our %mults = (
 	K	=> 1024,
@@ -36,7 +36,7 @@ return eval_line_numbers(<<'END_SOURCE');
 	sub {
 		my ($config, $prototype_string, $where) = @_;
 		$prototype_string =~ s/^(\t+)/" " x length($1) * 8/e;
-		my $proto = YAML::ConfigFile::YAML::Load($prototype_string);
+		my $proto = Config::YAMLMacros::YAML::Load($prototype_string);
 
 		my %checker;
 		my $error;

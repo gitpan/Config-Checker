@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 use Test::More qw(no_plan);
-use YAML::ConfigFile;
+use Config::YAMLMacros;
 use FindBin;
 
 my $finished = 0;
