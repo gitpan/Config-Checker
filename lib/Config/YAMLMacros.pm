@@ -38,8 +38,12 @@ sub replace(\%\$)
 	return unless $jlist;
 	my $re = qr/$jlist/;
 	my $iteration = 0;
+	my $replace = sub {
+		# print STDERR "# replacing '$_[0]' with '$href->{$_[0]}'\n";
+		return $href->{$_[0]};
+	};
 	for (;;) {
-		$$sref =~ s/($re)/$href->{$1}/ge or last;
+		$$sref =~ s/($re)/$replace->($1)/ge or last;
 		if ($iteration++ >= $max_replace_iterations) {
 			confess "too many replacements in $$sref";
 		}
@@ -132,6 +136,10 @@ sub get_config
 
 
 __END__
+
+=head1 NAME
+
+Config::YAMLMacros - Include file and string subsitution for YAML configuration files
 
 =head1 SYNOPSIS
 

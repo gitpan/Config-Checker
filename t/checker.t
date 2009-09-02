@@ -6,7 +6,7 @@ use warnings;
 use FindBin;
 use Config::Checker;
 use Test::More qw(no_plan);
-use YAML qw(Load);
+use YAML::Syck qw(Load);
 use Time::ParseDate;
 use Clone::PP qw(clone);
 
@@ -63,12 +63,12 @@ parameters:
     - 10/8
     - 192.168/16
 hostsinfo:
-  host1.example.com:
+  www.google.com:
     max_threads:        2
     max_memory:         1G
     temporary_storage:  /tmp
     datadir:            /data1/delogs
-master_node:            host2.example.com
+master_node:            www.yahoo.com
 headers:                /data2/david/logtmp/headers/%NAME%
 metadata:               /data2/david/logtmp/metadata/%YYYY%.%MM%.%DD%.%JOBNAME%
 sources:
@@ -85,11 +85,11 @@ sources:
     # ----------------------------------------------------------------
     name:                       client logs
     hosts:
-     - host3.example.com
-     - host4.example.com
-     - host5.example.com
-     - host6.example.com
-     - host7.example.com
+     - www.facebook.com
+     - www.linkedin.com
+     - www.myspace.com
+     - www.microsoft.com
+     - www.oracle.com
     path:                       /data1/delogs/clientlog_%loghost=\w+-r\d+%.%YYYY%-%M%-%D%-%hour%=\d+%-%=\d+%
     remove_after:               90 days
     format:                     JSON
@@ -111,8 +111,8 @@ jobs:
     # 
     filter:             $log->{type} ne 'toolbar'
     hosts:
-      - ds18-r50
-      - ds19-r50
+      - www.sun.com
+      - www.ibm.com
     path:               %DATADIR%/bysession/%YYYY%/%MM%/%DD%/sessions.%BUCKET%.dirty
     buckets:            16
     bucketizer:         $log->{user_id} || $log->{machine_id} || $log->{session_id}
@@ -169,7 +169,7 @@ my $c1 = eval config_checker_source;
 BAIL_OUT($@) if $@;
 ok(1, 'eval');
 
-eval validate_config($good_config, $prototype_config);
+eval validate_config(clone($good_config), $prototype_config);
 is($@, '', 'good config');
 
 my $config;

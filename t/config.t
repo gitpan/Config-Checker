@@ -22,7 +22,7 @@ is($config->{something_from_2b}, 4, 'include of 2b');
 is($config->{something_from_2c}, 5, 'include of 2c');
 is($config->{something_from_2d}, 7, 'include of 2c');
 
-is($config->{furry1}, 'ateddybear too', 'substitution in abear');
+is($config->{furry1}, 'ateddy too', 'substitution in abear');
 is($config->{pond1}, 'noisy frog', 'substitution in noisy ribbit');
 is($config->{PTT2}, $path_to_t, 'substitution PTT2');
 

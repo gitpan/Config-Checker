@@ -14,7 +14,7 @@ use Config::YAMLMacros::YAML;
 our @ISA = qw(Exporter);
 our @EXPORT = qw(config_checker_source);
 our @EXPORT_OK = (@EXPORT, qw(unique split_listify));
-our $VERSION = 0.4;
+our $VERSION = 0.41;
 
 our %mults = (
 	K	=> 1024,
@@ -86,18 +86,6 @@ return eval_line_numbers(<<'END_SOURCE');
 			if (ref $value) {
 				die "Not expecting a ".ref($value)." for $context $where";
 			}
-			if ($code) {
-				my $override = $code =~ s/^=//;
-				undef $error;
-				unless ($checker{$code}) {
-					$checker{$code} = eval qq{ sub { $code } };
-					die "validation code '$code' is broken for validating $context: $@ $where" if $@;
-				}
-				my $valid = $checker{$code}->($value);
-				die $error." $where\n" if $error;
-				die "Invalid $context value, should be $desc ($code) $where" unless $valid;
-				$$ref = $valid if $override;
-			}
 			if ($type eq 'MODULE_NAME') {
 				eval { Module::Load::load $value };
 				die "Could not load module $value for $context ($proto): $@ $where" if $@;
@@ -149,8 +137,18 @@ return eval_line_numbers(<<'END_SOURCE');
 			} elsif ($type ne '') {
 				die "Unknown type specification '$type' for $context $where";
 			}
-
-			# XXX HOSTNAME DATE etc
+			if ($code) {
+				my $override = $code =~ s/^=//;
+				undef $error;
+				unless ($checker{$code}) {
+					$checker{$code} = eval qq{ sub { $code } };
+					die "validation code '$code' is broken for validating $context: $@ $where" if $@;
+				}
+				my $valid = $checker{$code}->($value);
+				die $error." $where\n" if $error;
+				die "Invalid $context value, should be $desc ($code) $where" unless $valid;
+				$$ref = $valid if $override;
+			}
 		};
 		# This is self-referential and will leak.  Oh, well.
 		my $compare;
@@ -273,6 +271,10 @@ sub unique
 1;
 
 __END__
+
+=head1 NAME
+
+Config::Checker - Validate configuration objects against a template
 
 =head1 SYNOPSIS
 

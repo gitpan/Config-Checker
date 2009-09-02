@@ -12,7 +12,9 @@ WriteMakefile(
 		'Clone::PP'		=> 0,
 		'Time::ParseDate'	=> 0,
 		'FindBin'		=> 0,
-		'YAML'			=> 0,
+		'YAML::Syck'		=> 0,
+		'Eval::LineNumbers'	=> 0,
+		'Hash::Merge'		=> 0,
 	},
 );
 
