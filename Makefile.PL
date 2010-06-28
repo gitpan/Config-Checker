@@ -15,6 +15,11 @@ WriteMakefile(
 		'YAML::Syck'		=> 0,
 		'Eval::LineNumbers'	=> 0,
 		'Hash::Merge'		=> 0,
+		'File::Slurp'		=> 0,
+		'Module::Load'		=> 0,
+		'Carp'			=> 0,
+		'File::Basename'	=> 0,
+		'Test::More'		=> 0,
 	},
 );
 
